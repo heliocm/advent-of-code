@@ -20,33 +20,37 @@ def orientation(facing, rotation):
         else:
             return 'N'
 
-def takeSteps(facing, stepsize, visited):
+def takeSteps(facing, stepsize, visited, answer):
     if facing == 'N':
         for i in range(1, stepsize+1):
             new = [visited[-1][0]+1,visited[-1][1]]
-            if new in visited:
-                print(new)
+            if new in visited and len(answer) < 1:
+                print(sum(new))
+                answer.append(new)
             else:
                 visited.append(new)
     elif facing == 'S':
         for i in range(1, stepsize+1):
             new = [visited[-1][0]-1,visited[-1][1]]
-            if new in visited:
-                print(new)
+            if new in visited and len(answer) < 1:
+                print(sum(new))
+                answer.append(new)
             else:
                 visited.append(new)
     elif facing == 'L':
         for i in range(1, stepsize+1):
             new = [visited[-1][0],visited[-1][1]+1]
-            if new in visited:
-                print(new)
+            if new in visited and len(answer) < 1:
+                print(sum(new))
+                answer.append(new)
             else:
                 visited.append(new)
     else:
         for i in range(1, stepsize+1):
             new = [visited[-1][0],visited[-1][1]-1]
-            if new in visited:
-                print(new)
+            if new in visited and len(answer) < 1:
+                print(sum(new))
+                answer.append(new)
             else:
                 visited.append(new)
 
@@ -58,10 +62,11 @@ instructions = data[0].split(", ")
 
 facing = 'N'
 visited = [[0,0]]
+answer = []
 for instruction in instructions:
     rotation = instruction[0]
     stepsize = int(instruction[1:])
     facing = orientation(facing, rotation)
-    takeSteps(facing, stepsize, visited)
+    takeSteps(facing, stepsize, visited, answer)
 
 
